@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FULL DISCOGRAPHY - GNAMA RECORDS</title>
+  <meta name="description" content="Browse the full GNAMA RECORDS discography and search tracks by song or artist.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --dark: #121417;
+      --dark2: #1a1f26;
+      --line: rgba(255, 255, 255, 0.12);
+      --white: #f5f5f0;
+      --gold: #c9a84c;
+      --gold2: #e8c96a;
+      --muted: rgba(245, 245, 240, 0.62);
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-condensed: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--white);
+      background:
+        radial-gradient(900px 520px at -8% -12%, rgba(232, 201, 106, 0.1), transparent 58%),
+        radial-gradient(900px 520px at 108% 0%, rgba(88, 122, 220, 0.12), transparent 60%),
+        linear-gradient(180deg, #080b10 0%, #0b1018 48%, #06080c 100%);
+      padding: 38px 22px 64px;
+    }
+
+    .wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    .back-btn {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+      color: var(--white);
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-family: var(--font-condensed);
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      font-size: 12px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+      border-color: rgba(201, 168, 76, 0.52);
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      letter-spacing: 4px;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .brand span {
+      color: var(--gold);
+    }
+
+    .hero {
+      margin-bottom: 22px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      box-shadow: 0 24px 54px rgba(0, 0, 0, 0.34);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: -45% auto auto -15%;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.24), rgba(201, 168, 76, 0));
+      pointer-events: none;
+    }
+
+    .label {
+      font-family: var(--font-condensed);
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(46px, 8vw, 88px);
+      letter-spacing: 4px;
+      line-height: 0.9;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+      text-wrap: balance;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .toolbar {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .search {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(8, 11, 16, 0.72);
+      color: var(--white);
+      padding: 13px 15px;
+      font-size: 14px;
+      font-family: var(--font-body);
+    }
+
+    .search:focus {
+      outline: 2px solid rgba(201, 168, 76, 0.46);
+      outline-offset: 2px;
+    }
+
+    .count {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(8, 11, 16, 0.72);
+      padding: 13px 15px;
+      font-family: var(--font-condensed);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(245, 245, 240, 0.88);
+      min-width: 170px;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .track {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+      padding: 16px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.3);
+      transform: translateY(0);
+      transition: transform 0.26s ease, border-color 0.26s ease, box-shadow 0.26s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 186px;
+      animation: cardFloat 5.8s ease-in-out infinite;
+    }
+
+    .track:nth-child(2n) {
+      animation-delay: -1.5s;
+    }
+
+    .track:nth-child(3n) {
+      animation-delay: -3s;
+    }
+
+    .track:hover {
+      transform: translateY(-10px);
+      border-color: rgba(201, 168, 76, 0.54);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.42);
+      animation-play-state: paused;
+    }
+
+
+    .track-cover-wrap {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      margin-bottom: 4px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .track-cover {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      display: block;
+    }
+
+    .track-title {
+      font-family: var(--font-display);
+      font-size: 34px;
+      letter-spacing: 2px;
+      line-height: 0.95;
+    }
+
+    .track-artist {
+      font-family: var(--font-condensed);
+      font-size: 15px;
+      letter-spacing: 1.1px;
+      color: rgba(245, 245, 240, 0.86);
+      text-transform: uppercase;
+    }
+
+    .meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .pill {
+      font-family: var(--font-condensed);
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: rgba(245, 245, 240, 0.76);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      padding: 5px 9px;
+    }
+
+    .cta {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(201, 168, 76, 0.48);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--gold2);
+      font-family: var(--font-condensed);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      padding: 10px 12px;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      background: rgba(201, 168, 76, 0.1);
+    }
+
+    .cta.disabled {
+      pointer-events: none;
+      border-color: rgba(255, 255, 255, 0.18);
+      color: rgba(245, 245, 240, 0.45);
+    }
+
+    .empty {
+      margin-top: 14px;
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+      color: rgba(245, 245, 240, 0.68);
+      font-family: var(--font-condensed);
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+      display: none;
+    }
+
+    @keyframes cardFloat {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+
+
+    /* ═══ PAGE LEAVE TRANSITION ═══ */
+    .page-leave {
+      position: fixed;
+      inset: 0;
+      z-index: 99998;
+      background: var(--black);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      pointer-events: none;
+    }
+
+    .page-leave.active {
+      animation: pageLeaveAnim 0.55s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+    }
+
+    @keyframes pageLeaveAnim {
+      0% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+      }
+
+      50% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+      }
+
+      51% {
+        transform-origin: top;
+      }
+
+      100% {
+        transform: scaleY(0);
+        transform-origin: top;
+      }
+    }
+
+    /* ═══ STAGGER CARD ENTRANCE ═══ */
+    .track.card-enter {
+      opacity: 0;
+      transform: translateY(36px) scale(0.96);
+      filter: blur(5px);
+    }
+
+    .track.card-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+      transition: opacity 0.65s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    /* ═══ ENHANCED HOVER GLOW ═══ */
+    .track::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: radial-gradient(circle at 50% 0%, rgba(201, 168, 76, 0.12), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .track {
+      position: relative;
+    }
+
+    .track:hover::before {
+      opacity: 1;
+    }
+
+    /* ═══ HERO FADE IN ═══ */
+    .hero {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero.entered {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══ NOISE OVERLAY ═══ */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.026;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 200px 200px;
+    }
+
+    /* ═══ TITLE CHAR SPLIT ═══ */
+    h1 .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(60px) rotateX(-30deg);
+      animation: charReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes charReveal {
+      to {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg);
+      }
+    }
+
+    /* ═══ CTA SHIMMER ═══ */
+    .cta:not(.disabled) {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .cta:not(.disabled)::after {
+      content: '';
+      position: absolute;
+      top: -20%;
+      bottom: -20%;
+      left: -140%;
+      width: 34%;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.22) 50%, rgba(255, 255, 255, 0) 100%);
+      transform: skewX(-18deg);
+      transition: left 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+      z-index: -1;
+    }
+
+    .cta:not(.disabled):hover::after {
+      left: 125%;
+    }
+
+    @media (max-width: 980px) {
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      body {
+        padding: 22px 14px 48px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .count {
+        min-width: 0;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .track-title {
+        font-size: 30px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .track,
+      .hero,
+      h1 .char {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+
+      .cursor-dot,
+      .cursor-trail {
+        display: none !important;
+      }
+
+      body::after {
+        animation: none !important;
+      }
+    }
+
+    /* ═══ ULTRA ANIMATION UPGRADE ═══ */
+
+    /* CURSOR TRAIL */
+    .cursor-dot {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      pointer-events: none;
+      z-index: 99997;
+      mix-blend-mode: difference;
+      transition: width 0.25s ease, height 0.25s ease, opacity 0.25s ease;
+    }
+
+    .cursor-dot.hovering {
+      width: 20px;
+      height: 20px;
+      margin-left: -6px;
+      margin-top: -6px;
+      opacity: 0.7;
+    }
+
+    .cursor-trail {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      pointer-events: none;
+      z-index: 99996;
+      opacity: 0;
+    }
+
+    /* MOUSE-FOLLOW GLOW */
+    .card-glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 168, 76, 0.16) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 4;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.35s ease;
+      mix-blend-mode: screen;
+    }
+
+    /* ANIMATED NOISE */
+    body::after {
+      animation: noiseShift 0.8s steps(4) infinite;
+    }
+
+    @keyframes noiseShift {
+      0% {
+        background-position: 0 0;
+      }
+
+      25% {
+        background-position: 100px 50px;
+      }
+
+      50% {
+        background-position: -50px 100px;
+      }
+
+      75% {
+        background-position: 80px -30px;
+      }
+
+      100% {
+        background-position: 0 0;
+      }
+    }
+
+    /* SEARCH INPUT GLOW */
+    .search {
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .search:focus {
+      border-color: rgba(201, 168, 76, 0.5);
+      box-shadow: 0 0 20px rgba(201, 168, 76, 0.15), 0 0 4px rgba(201, 168, 76, 0.2);
+    }
+
+    /* COVER ZOOM HOVER */
+    .track-cover {
+      transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.5s ease;
+    }
+
+    .track:hover .track-cover {
+      transform: scale(1.08);
+      filter: brightness(1.1);
+    }
+
+    /* HERO PARALLAX */
+    .hero {
+      transition: transform 0.1s ease-out;
+    }
+
+    /* TRACK COUNT ANIMATION */
+    .count {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .count.count-bump {
+      transform: scale(1.08);
+    }
+
+    /* CARD ENTRANCE WAVE */
+    .track.card-enter {
+      opacity: 0;
+      transform: translateY(48px) scale(0.94) rotate(1deg);
+      filter: blur(6px);
+    }
+
+    .track.card-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1) rotate(0deg);
+      filter: blur(0);
+      transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    @media (pointer: coarse) {
+
+      .cursor-dot,
+      .cursor-trail {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-trail" id="trail0"></div>
+  <div class="cursor-trail" id="trail1"></div>
+  <div class="cursor-trail" id="trail2"></div>
+  <div class="cursor-trail" id="trail3"></div>
+  <div class="cursor-trail" id="trail4"></div>
+
+  <div class="page-leave" id="pageLeave"></div>
+
+  <div class="wrap">
+    <div class="topbar">
+      <a href="#" id="backBtn" class="back-btn">Back to GNAMA RECORDS</a>
+      <div class="brand">GNAMA <span>RECORDS</span></div>
+    </div>
+
+    <section class="hero" id="heroSection">
+      <p class="label">Catalog</p>
+      <h1 id="heroTitle">FULL<br>DISCOGRAPHY</h1>
+      <p class="lead">Search by song title or artist name to quickly find tracks from the GNAMA RECORDS universe.</p>
+
+      <div class="toolbar">
+        <input id="searchInput" class="search" type="search" placeholder="Search song or artist..."
+          aria-label="Search song or artist">
+        <div id="count" class="count">0 Tracks</div>
+      </div>
+    </section>
+
+    <section id="catalog" class="grid" aria-live="polite"></section>
+    <div id="emptyState" class="empty">No track found. Try another search.</div>
+  </div>
+
+  <script>
+    // ═══ CUSTOM CURSOR (dot only) ═══
+    (function () {
+      const dot = document.getElementById('cursorDot');
+      if (!dot || window.matchMedia('(pointer: coarse)').matches) return;
+      document.addEventListener('mousemove', (e) => {
+        dot.style.left = e.clientX + 'px';
+        dot.style.top = e.clientY + 'px';
+      });
+      document.addEventListener('mouseover', (e) => {
+        const el = e.target.closest('a, button, .track, .cta, .back-btn, .search');
+        if (el) { dot.classList.add('hovering'); }
+        else { dot.classList.remove('hovering'); }
+      });
+    })();
+
+    // ═══ HERO TITLE CHAR SPLIT ═══
+    (function () {
+      const h1 = document.getElementById('heroTitle');
+      if (!h1) return;
+      const html = h1.innerHTML;
+      const parts = html.split(/(<[^>]+>)/g);
+      let idx = 0;
+      const out = parts.map(p => {
+        if (p.startsWith('<')) return p;
+        return p.split('').map(c => {
+          if (c === ' ') { idx++; return ' '; }
+          const delay = 0.4 + idx * 0.04;
+          idx++;
+          return `<span class="char" style="animation-delay:${delay}s">${c}</span>`;
+        }).join('');
+      }).join('');
+      h1.innerHTML = out;
+    })();
+
+    const tracks = [
+      {
+        title: 'SEM PENSAR',
+        artist: 'DJ MPS & TRAXXENN',
+        genre: 'Baile',
+        year: '2025',
+        cover: 'https://i.scdn.co/image/ab6761610000e5eb2d223064b490d1e520e37899',
+        link: 'https://open.spotify.com/intl-fr/album/1mjXc8GwFEi9FO0ycMGAGh?si=TCMBbFAIRkueS_rb2cT0hQhttps://open.spotify.com/intl-fr/artist/0Q3JvO6keTfcb8V9iUyi6A?si=WqWbdnAcRKu37C7C0YaJaw'
+      },
+      {
+        title: 'Montagem Pasulam',
+        artist: 'DJ KITSXU x Fake.Luca',
+        genre: 'Club / Electronic',
+        year: '2026',
+        cover: 'https://i.scdn.co/image/ab67616d0000b2735551a4b3db4103653791c453',
+        link: 'https://open.spotify.com/intl-fr/track/0ylYjZcxkImC123bx8BPh9?si=bebde5f269814d8d'
+      },
+      {
+        title: 'Diamants Noirs',
+        artist: 'MARA',
+        genre: 'Trap / Urban',
+        year: '2026',
+        cover: 'LOGO.png',
+        link: ''
+      },
+      {
+        title: 'Phase IV',
+        artist: 'SYAN',
+        genre: 'Electronic',
+        year: '2026',
+        cover: 'LOGO.png',
+        link: ''
+      },
+      {
+        title: 'Golden Hours',
+        artist: 'NAYO',
+        genre: 'R&B / Soul',
+        year: '2026',
+        cover: 'LOGO.png',
+        link: ''
+      },
+      {
+        title: 'Night Pressure',
+        artist: 'DJ MPS',
+        genre: 'Club',
+        year: '2025',
+        cover: 'https://i.scdn.co/image/ab6761610000e5eb1964f2099964aeeffd6c12cf',
+        link: 'https://open.spotify.com/intl-fr/artist/2L4sMVJ4e6W7vzR7ickM8q?si=UCLb4ZhmSZylqHq0vkfd2Q'
+      },
+      {
+        title: 'Black Aurora',
+        artist: 'TRAXXENN',
+        genre: 'Trap',
+        year: '2025',
+        cover: 'https://i.scdn.co/image/ab6761610000e5eb84d5fba48b436fc399294b31',
+        link: 'https://open.spotify.com/intl-fr/artist/1Vlomsuf5lh9EPadKYWfo7?si=8MWY35zBSAa5xVZ5Fxz0_Q'
+      },
+      {
+        title: 'Phantom Drive',
+        artist: 'DJ KITSXU',
+        genre: 'Electronic',
+        year: '2025',
+        cover: 'https://i.scdn.co/image/ab6761610000e5eb2d223064b490d1e520e37899',
+        link: 'https://open.spotify.com/intl-fr/artist/0Q3JvO6keTfcb8V9iUyi6A?si=WqWbdnAcRKu37C7C0YaJaw'
+      },
+
+      {
+        title: 'Neon Ritual',
+        artist: 'Fake.Luca',
+        genre: 'Club',
+        year: '2025',
+        cover: 'https://i.scdn.co/image/ab6761610000e5eba03342252d00267bfbfec89b',
+        link: 'https://open.spotify.com/intl-fr/artist/2sWTkzH5ugVBiYXjsw3MkM?si=betcjWeiRAyVT1-H4EIuKA'
+      },
+      {
+        title: 'Cold Frequency',
+        artist: 'TRAXXENN',
+        genre: 'Urban',
+        year: '2024',
+        cover: 'https://i.scdn.co/image/ab6761610000e5eb84d5fba48b436fc399294b31',
+        link: 'https://open.spotify.com/intl-fr/artist/1Vlomsuf5lh9EPadKYWfo7?si=8MWY35zBSAa5xVZ5Fxz0_Q'
+      },
+      {
+        title: 'Altitude',
+        artist: 'DJ MPS',
+        genre: 'Afro Club',
+        year: '2024',
+        cover: 'https://i.scdn.co/image/ab6761610000e5eb1964f2099964aeeffd6c12cf',
+        link: 'https://open.spotify.com/intl-fr/artist/2L4sMVJ4e6W7vzR7ickM8q?si=UCLb4ZhmSZylqHq0vkfd2Q'
+      },
+      {
+        title: 'No Signal',
+        artist: 'DJ KITSXU',
+        genre: 'Bass Music',
+        year: '2024',
+        cover: 'https://i.scdn.co/image/ab6761610000e5eb2d223064b490d1e520e37899',
+        link: 'https://open.spotify.com/intl-fr/artist/0Q3JvO6keTfcb8V9iUyi6A?si=WqWbdnAcRKu37C7C0YaJaw'
+      },
+      {
+        title: 'Afterlight',
+        artist: 'Fake.Luca',
+        genre: 'Electronic Pop',
+        year: '2024',
+        cover: 'https://i.scdn.co/image/ab6761610000e5eba03342252d00267bfbfec89b',
+        link: 'https://open.spotify.com/intl-fr/artist/2sWTkzH5ugVBiYXjsw3MkM?si=betcjWeiRAyVT1-H4EIuKA'
+      }
+    ];
+
+    const catalog = document.getElementById('catalog');
+    const searchInput = document.getElementById('searchInput');
+    const count = document.getElementById('count');
+    const emptyState = document.getElementById('emptyState');
+    const backBtn = document.getElementById('backBtn');
+
+    backBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const pageLeave = document.getElementById('pageLeave');
+      if (pageLeave && window.history.length > 1) {
+        pageLeave.classList.add('active');
+        setTimeout(() => window.history.back(), 400);
+      } else if (window.history.length > 1) {
+        window.history.back();
+      }
+    });
+
+    const render = (list) => {
+      catalog.innerHTML = '';
+      count.textContent = `${list.length} Track${list.length > 1 ? 's' : ''}`;
+
+      if (!list.length) {
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+
+      list.forEach((item, index) => {
+        const card = document.createElement('article');
+        card.className = 'track card-enter';
+
+        const action = item.link
+          ? `<a class="cta" href="${item.link}" target="_blank" rel="noopener">Open</a>`
+          : '<span class="cta disabled">No Link Yet</span>';
+        card.innerHTML = `
+          <div class="track-cover-wrap">
+            <img class="track-cover" src="${item.cover}" alt="${item.title} cover" loading="lazy" decoding="async">
+          </div>
+          <h2 class="track-title">${item.title}</h2>
+          <p class="track-artist">${item.artist}</p>
+          <div class="meta">
+            <span class="pill">${item.genre}</span>
+            <span class="pill">${item.year}</span>
+          </div>
+          ${action}
+        `;
+
+        catalog.appendChild(card);
+
+        // Stagger entrance
+        setTimeout(() => {
+          card.classList.add('card-visible');
+        }, 60 + index * 80);
+      });
+    };
+
+    const filter = () => {
+      const q = searchInput.value.trim().toLowerCase();
+      if (!q) {
+        render(tracks);
+        return;
+      }
+      const filtered = tracks.filter((t) => {
+        return t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q);
+      });
+      render(filtered);
+    };
+
+    searchInput.addEventListener('input', filter);
+    render(tracks);
+
+    // ═══ CURSOR TRAIL SYSTEM ═══
+    (function () {
+      const dot = document.getElementById('cursorDot');
+      if (!dot || window.matchMedia('(pointer: coarse)').matches) return;
+      const trailEls = [0, 1, 2, 3, 4].map(i => document.getElementById('trail' + i));
+      const trailPos = trailEls.map(() => ({ x: 0, y: 0 }));
+      let mouseX = 0, mouseY = 0;
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX; mouseY = e.clientY;
+        dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
+      });
+      function animateTrail() {
+        trailEls.forEach((el, i) => {
+          const prev = i === 0 ? { x: mouseX, y: mouseY } : trailPos[i - 1];
+          const speed = 0.25 - i * 0.03;
+          trailPos[i].x += (prev.x - trailPos[i].x) * speed;
+          trailPos[i].y += (prev.y - trailPos[i].y) * speed;
+          el.style.left = trailPos[i].x + 'px'; el.style.top = trailPos[i].y + 'px';
+          el.style.opacity = String(0.5 - i * 0.08);
+          el.style.width = el.style.height = (4 - i * 0.5) + 'px';
+        });
+        requestAnimationFrame(animateTrail);
+      }
+      animateTrail();
+      document.addEventListener('mouseover', (e) => {
+        if (e.target.closest('a, button, .track, .cta, .back-btn, .search')) dot.classList.add('hovering');
+        else dot.classList.remove('hovering');
+      });
+    })();
+
+    // ═══ MOUSE-FOLLOW GLOW ON CARDS ═══
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const addGlow = () => {
+        document.querySelectorAll('.track').forEach(card => {
+          if (card.querySelector('.card-glow')) return;
+          const glow = document.createElement('div');
+          glow.className = 'card-glow';
+          card.appendChild(glow);
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            glow.style.left = (e.clientX - rect.left) + 'px';
+            glow.style.top = (e.clientY - rect.top) + 'px';
+            glow.style.opacity = '1';
+          });
+          card.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
+        });
+      };
+      // Re-apply after render
+      const origRender = render;
+      const patchedRender = (list) => { origRender(list); setTimeout(addGlow, 150); };
+      searchInput.removeEventListener('input', filter);
+      const patchedFilter = () => {
+        const q = searchInput.value.trim().toLowerCase();
+        if (!q) { patchedRender(tracks); return; }
+        patchedRender(tracks.filter(t => t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q)));
+      };
+      searchInput.addEventListener('input', patchedFilter);
+      addGlow();
+
+      // ═══ HERO PARALLAX ═══
+      const heroSection = document.getElementById('heroSection');
+      if (heroSection) {
+        window.addEventListener('scroll', () => {
+          const y = window.scrollY;
+          heroSection.style.transform = `translateY(${(y * 0.04).toFixed(2)}px)`;
+        }, { passive: true });
+      }
+
+      // ═══ TRACK COUNT ANIMATION ═══
+      const countEl = document.getElementById('count');
+      if (countEl) {
+        const origText = countEl.textContent;
+        const countMO = new MutationObserver(() => {
+          countEl.classList.add('count-bump');
+          setTimeout(() => countEl.classList.remove('count-bump'), 300);
+        });
+        countMO.observe(countEl, { childList: true, characterData: true, subtree: true });
+      }
+    }
+
+    // ═══ PAGE LEAVE FOR LINKS ═══
+    document.querySelectorAll('a[href]').forEach(a => {
+      const href = a.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || a.target === '_blank' || a.id === 'backBtn') return;
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const pl = document.getElementById('pageLeave');
+        if (pl) { pl.classList.add('active'); setTimeout(() => { window.location.href = href; }, 450); }
+        else { window.location.href = href; }
+      });
+    });
+  </script>
+</body>
+
+</html>
